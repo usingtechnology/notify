@@ -47,14 +47,14 @@ export class GcNotifyManagementController {
     summary: 'List senders',
     description: EXTENSION_DESCRIPTION,
   })
-  @ApiQuery({ name: 'type', required: false, enum: ['email', 'sms', 'both'] })
+  @ApiQuery({ name: 'type', required: false, enum: ['email', 'sms', 'email+sms'] })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved senders',
     type: SendersListResponse,
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getSenders(@Query('type') type?: 'email' | 'sms' | 'both') {
+  async getSenders(@Query('type') type?: 'email' | 'sms' | 'email+sms') {
     return this.gcNotifyService.getSenders(type);
   }
 

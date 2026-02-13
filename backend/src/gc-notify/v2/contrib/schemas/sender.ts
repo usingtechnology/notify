@@ -14,12 +14,12 @@ export class Sender {
 
   @ApiProperty({
     description: 'Sender type',
-    enum: ['email', 'sms', 'both'],
+    enum: ['email', 'sms', 'email+sms'],
   })
-  type: 'email' | 'sms' | 'both';
+  type: 'email' | 'sms' | 'email+sms';
 
   @ApiPropertyOptional({
-    description: 'Email address for reply-to (required when type is email or both)',
+    description: 'Email address for reply-to (required when type is email or email+sms)',
     example: 'noreply@gov.bc.ca',
   })
   email_address?: string;

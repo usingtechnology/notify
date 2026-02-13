@@ -16,28 +16,28 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 export class CreateSenderRequest {
   @ApiProperty({
     description: 'Sender type',
-    enum: ['email', 'sms', 'both'],
+    enum: ['email', 'sms', 'email+sms'],
   })
-  @IsIn(['email', 'sms', 'both'])
-  type: 'email' | 'sms' | 'both';
+  @IsIn(['email', 'sms', 'email+sms'])
+  type: 'email' | 'sms' | 'email+sms';
 
   @ApiPropertyOptional({
-    description: 'Email address for reply-to (required when type is email or both)',
+    description: 'Email address for reply-to (required when type is email or email+sms)',
     example: 'noreply@gov.bc.ca',
   })
-  @ValidateIf((o) => o.type === 'email' || o.type === 'both')
+  @ValidateIf((o) => o.type === 'email' || o.type === 'email+sms')
   @IsEmail()
   email_address?: string;
 
   @ApiPropertyOptional({
     description:
-      'SMS sender - required when type is sms or both. Accepts either: (1) Alphanumeric sender ID (e.g. GOVBC, 1-11 chars) shown as sender name, or (2) E.164 phone number (e.g. +15551234567) for sender display.',
+      'SMS sender - required when type is sms or email+sms. Accepts either: (1) Alphanumeric sender ID (e.g. GOVBC, 1-11 chars) shown as sender name, or (2) E.164 phone number (e.g. +15551234567) for sender display.',
     examples: {
       alphanumeric: { summary: 'Alphanumeric sender ID', value: 'GOVBC' },
       e164: { summary: 'E.164 phone number', value: '+15551234567' },
     },
   })
-  @ValidateIf((o) => o.type === 'sms' || o.type === 'both')
+  @ValidateIf((o) => o.type === 'sms' || o.type === 'email+sms')
   @IsString()
   @Matches(/^[\dA-Za-z+]{1,15}$/, {
     message: 'SMS sender must be alphanumeric (max 11 chars) or E.164 phone number (max 15 chars)',

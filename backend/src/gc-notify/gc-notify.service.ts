@@ -162,11 +162,11 @@ export class GcNotifyService {
 
   // --- Senders CRUD (Extension: Management) ---
 
-  async getSenders(type?: 'email' | 'sms' | 'both'): Promise<{ senders: Sender[] }> {
+  async getSenders(type?: 'email' | 'sms' | 'email+sms'): Promise<{ senders: Sender[] }> {
     this.logger.log('Getting senders list');
     let senders = Array.from(this.senders.values());
     if (type) {
-      senders = senders.filter((s) => s.type === type || s.type === 'both');
+      senders = senders.filter((s) => s.type === type || s.type === 'email+sms');
     }
     return { senders };
   }
@@ -224,14 +224,14 @@ export class GcNotifyService {
   }
 
   private validateSenderFields(body: CreateSenderRequest): void {
-    if (body.type === 'email' || body.type === 'both') {
+    if (body.type === 'email' || body.type === 'email+sms') {
       if (!body.email_address) {
-        throw new BadRequestException('email_address is required when type is email or both');
+        throw new BadRequestException('email_address is required when type is email or email+sms');
       }
     }
-    if (body.type === 'sms' || body.type === 'both') {
+    if (body.type === 'sms' || body.type === 'email+sms') {
       if (!body.sms_sender) {
-        throw new BadRequestException('sms_sender is required when type is sms or both');
+        throw new BadRequestException('sms_sender is required when type is sms or email+sms');
       }
     }
   }
