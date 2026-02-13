@@ -12,9 +12,7 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('AppController', () => {
-    it('should be defined', () => {
-      expect(appController).toBeDefined();
-    });
+  it('should be defined', () => {
+    expect(appController).toBeDefined();
   });
 });
