@@ -30,6 +30,10 @@ async function bootstrap() {
     )
     .addTag('Health', 'Health check endpoints')
     .addTag('Notifications', 'Send and track notifications')
+    .addTag(
+      'GC Notify',
+      'GC Notify API replica - notifications, templates, bulk. Includes extension endpoints for sender and template management.',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

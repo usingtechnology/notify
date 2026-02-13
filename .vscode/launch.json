@@ -43,7 +43,7 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "test", "--", "--runInBand", "${relativeFile}"],
+      "runtimeArgs": ["run", "test", "--", "--runInBand", "${file}"],
       "cwd": "${workspaceFolder}/backend",
       "console": "integratedTerminal",
       "sourceMaps": true,
